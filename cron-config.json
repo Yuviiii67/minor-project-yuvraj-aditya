@@ -1,0 +1,16 @@
+[
+  {
+    "AllowedHeaders": [
+      "Authorization"
+    ],
+    "AllowedMethods": [
+      "GET"
+    ],
+    "AllowedOrigins": [
+      "http://your-main-bucket-url"  // No trailing slash
+    ],
+    "ExposeHeaders": [],
+    "MaxAgeSeconds": 3000
+  }
+]
+
