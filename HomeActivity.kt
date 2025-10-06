@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mealscale.R
+import com.example.mealscale.adapters.RecipeAdapter
 import com.example.mealscale.data.DatabaseHelper
 import com.example.mealscale.model.Recipe
-import com.example.mealscale.adapters.RecipeAdapter
 
 class HomeActivity : AppCompatActivity() {
     
@@ -17,8 +17,9 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var recipeRecyclerView: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var recipeAdapter: RecipeAdapter
-    private var recipeList: MutableList<Recipe> = mutableListOf()
-    private var filteredRecipeList: MutableList<Recipe> = mutableListOf()
+    
+    private var allRecipes: MutableList<Recipe> = mutableListOf()
+    private var filteredRecipes: MutableList<Recipe> = mutableListOf()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
         setupDatabase()
         setupRecyclerView()
         setupSearchView()
-        loadRecipes()
+        loadRecipesFromDatabase()
     }
     
     private fun initializeViews() {
@@ -41,13 +42,9 @@ class HomeActivity : AppCompatActivity() {
     }
     
     private fun setupRecyclerView() {
-        recipeAdapter = RecipeAdapter(filteredRecipeList) { recipe ->
+        recipeAdapter = RecipeAdapter(filteredRecipes) { recipe ->
             // Handle recipe click - navigate to detail screen
-            val intent = Intent(this, RecipeDetailActivity::class.java).apply {
-                putExtra("recipe_id", recipe.id)
-                putExtra("recipe_name", recipe.name)
-            }
-            startActivity(intent)
+            navigateToRecipeDetails(recipe)
         }
         
         recipeRecyclerView.apply {
@@ -60,7 +57,8 @@ class HomeActivity : AppCompatActivity() {
     private fun setupSearchView() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+                // Handle search submit if needed
+                return true
             }
             
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -68,60 +66,102 @@ class HomeActivity : AppCompatActivity() {
                 return true
             }
         })
+        
+        // Set search hint
+        searchView.queryHint = "Search recipes..."
     }
     
-    private fun loadRecipes() {
-        // Get recipes from database
-        val db = dbHelper.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM Recipes", null)
-        
-        recipeList.clear()
-        filteredRecipeList.clear()
-        
-        cursor.use { c ->
-            val idIndex = c.getColumnIndex("RecipeID")
-            val nameIndex = c.getColumnIndex("Name")
-            val descIndex = c.getColumnIndex("Description")
+    private fun loadRecipesFromDatabase() {
+        try {
+            // Clear existing data
+            allRecipes.clear()
+            filteredRecipes.clear()
             
-            while (c.moveToNext()) {
-                val id = c.getInt(idIndex)
-                val name = c.getString(nameIndex)
-                val description = c.getString(descIndex)
+            // Get recipes from database
+            val recipes = dbHelper.getAllRecipes()
+            
+            if (recipes.isNotEmpty()) {
+                allRecipes.addAll(recipes)
+                filteredRecipes.addAll(recipes)
                 
-                recipeList.add(Recipe(id, name, description))
+                // Update UI on main thread
+                runOnUiThread {
+                    recipeAdapter.notifyDataSetChanged()
+                    updateEmptyState()
+                }
+            } else {
+                // No recipes found - this shouldn't happen with sample data
+                showEmptyState("No recipes found. Sample data may not be loaded.")
             }
-        }
-        
-        filteredRecipeList.addAll(recipeList)
-        recipeAdapter.notifyDataSetChanged()
-        
-        // Show empty state if no recipes
-        if (recipeList.isEmpty()) {
-            // You can show a placeholder text here
+            
+        } catch (e: Exception) {
+            e.printStackTrace()
+            showEmptyState("Error loading recipes: ${e.message}")
         }
     }
     
     private fun filterRecipes(query: String) {
-        filteredRecipeList.clear()
+        filteredRecipes.clear()
         
         if (query.isEmpty()) {
-            filteredRecipeList.addAll(recipeList)
+            // Show all recipes if search is empty
+            filteredRecipes.addAll(allRecipes)
         } else {
+            // Filter recipes based on search query
             val lowerCaseQuery = query.lowercase()
-            recipeList.forEach { recipe ->
+            allRecipes.forEach { recipe ->
                 if (recipe.name.lowercase().contains(lowerCaseQuery) ||
-                    recipe.description.lowercase().contains(lowerCaseQuery)) {
-                    filteredRecipeList.add(recipe)
+                    recipe.description.lowercase().contains(lowerCaseQuery) ||
+                    recipe.category.lowercase().contains(lowerCaseQuery)) {
+                    filteredRecipes.add(recipe)
                 }
             }
         }
         
         recipeAdapter.notifyDataSetChanged()
+        updateEmptyState()
+    }
+    
+    private fun navigateToRecipeDetails(recipe: Recipe) {
+        val intent = Intent(this, RecipeDetailActivity::class.java).apply {
+            putExtra("recipe_id", recipe.id)
+            putExtra("recipe_name", recipe.name)
+            putExtra("recipe_description", recipe.description)
+        }
+        startActivity(intent)
+        
+        // Add slide animation
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    }
+    
+    private fun updateEmptyState() {
+        // You can implement this if you have an empty state view
+        // For now, the RecyclerView will just show nothing
+        if (filteredRecipes.isEmpty()) {
+            // Show empty state message
+            // emptyStateTextView.visibility = View.VISIBLE
+            // recipeRecyclerView.visibility = View.GONE
+        } else {
+            // Show recipe list
+            // emptyStateTextView.visibility = View.GONE
+            // recipeRecyclerView.visibility = View.VISIBLE
+        }
+    }
+    
+    private fun showEmptyState(message: String) {
+        // You can show a Toast or update a TextView
+        // Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
     
     override fun onResume() {
         super.onResume()
-        // Refresh recipes if needed (e.g., after adding new ones)
-        loadRecipes()
+        // Refresh data if needed (e.g., after adding new recipes)
+        // loadRecipesFromDatabase()
+    }
+    
+    override fun onDestroy() {
+        super.onDestroy()
+        // Close database connection if needed
+        // dbHelper.close()
     }
 }
