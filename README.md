@@ -12,7 +12,7 @@
 
 
 ## 📖 Overview
-MealScale is an Android app that personalizes cooking by scaling recipes based on available ingredients, guiding users step-by-step, and including a built-in timer.
+#MealScale is an Android app that personalizes cooking by scaling recipes based on available ingredients, guiding users step-by-step, and including a built-in timer.
 
 ## 🧱 Features
 - Ingredient scaling system  
