@@ -25,14 +25,12 @@
 - **Language:** Kotlin  
 - **Database:** SQLite  
 - **IDE:** Android Studio  
-- **UI Tools:** XML, Material Design 3  
-- **Design:** Figma, Canva
+- **UI Tools:** XML, 
+- **Design:**  Canva
 
 ## 📅 Current Progress
 ✅ Week 1 – Planning & Requirement Gathering  
 ✅ Week 2 – UI/UX Design Completed  
-✅ Week 3 – Database Setup Completed  
-🚧 Week 4 – Frontend Development (In Progress)
 
 ## 🎨 Theme
 Yellow–Orange modern look with simple typography.
