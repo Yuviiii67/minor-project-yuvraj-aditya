@@ -51,15 +51,28 @@ To run this project:
 
 ## 📸 Screenshots
 
-Here is a look at the application's interface.
+Here is a full gallery of the application's interface.
 
-| Splash Screen | Login Page | Home Page (Grid View) |
+| Splash Screen | Login Page | Alternate Login |
 | :---: | :---: | :---: |
-| <img src="screenshot/splashscreen.png" width="250"> | <img src="screenshot/login_page.png" width="250"> | <img src="screenshot/grid.png" width="250"> |
+| <img src="screenshot/splashscreen.png" width="250"> | <img src="screenshot/login_page.png" width="250"> | <img src="screenshot/login_page2.png" width="250"> |
 
-| Recipe Categories | Recipe Details | Ingredient Scaling |
+| Home Page | Grid View | Categories |
 | :---: | :---: | :---: |
-| <img src="screenshot/category.png" width="250"> | <img src="screenshot/Ingredients1.png" width="250"> | <img src="screenshot/Serving_people_for_2.png" width="250"> |
+| <img src="screenshot/home_page.png" width="250"> | <img src="screenshot/grid.png" width="250"> | <img src="screenshot/category.png" width="250"> |
+
+| Recipe Page | Serving for 2 | Step-by-Step |
+| :---: | :---: | :---: |
+| <img src="screenshot/recipe.png" width="250"> | <img src="screenshot/Serving_people_for_2.png" width="250"> | <img src="screenshot/stet_bystep.png" width="250"> |
+
+| Ingredients (1/2) | Ingredients (2/2) | Scaled to 200 |
+| :---: | :---: | :---: |
+| <img src="screenshot/Ingredients1.png" width="250"> | <img src="screenshot/Ingredients2.png" width="250"> | <img src.="screenshot/Ingredients_200.png" width="250"> |
+
+| Mobile View | | |
+| :---: | :---: | :---: |
+| <img src="screenshot/mobile.png" width="250"> | | |
+
 
 ## 📁 File Structure
 
