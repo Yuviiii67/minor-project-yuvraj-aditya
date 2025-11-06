@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- This is your existing theme for the main app -->
+    <style name="Base.Theme.MealScale" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#6750A4</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#625B71</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="android:colorBackground">#FFF7FF</item>
+        <item name="colorSurface">#FFF7FF</item>
+        <item name="colorOnBackground">#1D1B20</item>
+        <item name="colorOnSurface">#1D1B20</item>
+        <item name="colorSurfaceContainer">#F3EDF7</item>
+    </style>
+
+    <style name="Theme.MealScale" parent="Base.Theme.MealScale" />
+
+    <!--
+      === ADD THIS NEW STYLE ===
+      This is the new full-screen theme for your login page.
+      The AndroidManifest is looking for this.
+    -->
+    <style name="Theme.MealScale.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <!-- ========================== -->
+
+</resources>

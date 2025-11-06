@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">MealScale</string>
+
+    <!-- Strings for your activity -->
+    <string name="app_title">MealScale 🍽️</string>
+
+    <!-- LABELS / HINTS -->
+    <string name="category_label">Category</string>
+    <string name="recipe_label">Recipe</string>
+    <string name="quantity_label">Quantity</string>
+
+    <!-- HINTS AND PLACEHOLDERS -->
+    <string name="ingredient_hint">Enter base ingredient quantity</string> <!-- Removed e.g. -->
+    <string name="ingredients_placeholder">Ingredients will appear here</string>
+    <string name="steps_placeholder">Steps will appear here</string>
+
+    <!-- TIMER STRINGS -->
+    <string name="timer_default">Timer: Not started</string>
+    <string name="timer_placeholder">Timer: 00:00</string> <!-- This is the new string -->
+
+    <!-- BUTTONS -->
+    <string name="scale_button">Scale Ingredients</string>
+    <string name="start_timer_button">Start Cooking Timer</string>
+
+    <!-- NEW: Added this string for the ImageView -->
+    <string name="recipe_image_desc">Image of the selected recipe</string>
+</resources>
