@@ -52,7 +52,6 @@ With a modern yellow-themed UI and smart features, it’s a simple yet elegant c
    git clone https://github.com/Yuviiii67/minor-project-yuvraj-aditya.git
 
 
-
 minor-project-yuvraj-aditya/
 │
 ├── app/
