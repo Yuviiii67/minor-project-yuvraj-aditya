@@ -126,3 +126,20 @@ app
         └───java
             └───com/example/myapplication
                     └── ExampleUnitTest.kt
+Key Folders
+
+src/main/java: Contains all the Kotlin source code (.kt files), like MainActivity.kt and LoginActivity.kt.
+
+src/main/res: Contains all non-code resources.
+
+res/drawable: All images and custom shapes used in the app.
+
+res/layout: The XML files that define the app's user interface (screens), like activity_main.xml.
+
+res/mipmap: The app's launcher icons for different device densities.
+
+res/values: Core app values like colors (colors.xml), text strings (strings.xml), and styles (themes.xml).
+
+src/main/AndroidManifest.xml: The central file that describes the app's components (like its activities) and permissions to the Android system.
+
+androidTest & test: Folders for writing automated tests (unit tests and instrumentation tests).
